@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.agregarcontribuyente.AgregarContribuyenteFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!-- Nombre completo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre completo" />
+
+            <EditText
+                android:id="@+id/txtNombreCompleto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+
+            <!-- DNI/RUC -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DNI/RUC" />
+
+            <EditText
+                android:id="@+id/txtDniRuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Dirección del domicilio fiscal -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección del domicilio fiscal" />
+
+            <EditText
+                android:id="@+id/txtDireccionDomicilio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress" />
+
+            <!-- Teléfono de contacto -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teléfono de contacto" />
+
+            <EditText
+                android:id="@+id/txtTelefonoContacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+
+            <!-- Correo electrónico -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electrónico" />
+
+            <EditText
+                android:id="@+id/txtCorreoElectronico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+            <!-- Actividad económica o giro del negocio -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Actividad económica o giro del negocio" />
+
+            <EditText
+                android:id="@+id/txtActividadEconomica"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Estado civil y otros datos demográficos relevantes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado civil" />
+
+            <EditText
+                android:id="@+id/txtEstadoCivil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Tipo de propiedad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo de propiedad (residencial, comercial, industrial)" />
+
+            <EditText
+                android:id="@+id/txtTipoPropiedad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Ubicación de la propiedad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicación de la propiedad (dirección completa, coordenadas)" />
+
+            <EditText
+                android:id="@+id/txtUbicacionPropiedad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress" />
+
+            <!-- Área del terreno y construcción -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Área del terreno y construcción" />
+
+            <EditText
+                android:id="@+id/txtAreaTerreno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <!-- Valor catastral de la propiedad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Valor catastral de la propiedad" />
+
+            <EditText
+                android:id="@+id/txtValorCatastral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <!-- Uso de la propiedad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Uso de la propiedad (habitacional, alquiler, comercio, etc.)" />
+
+            <EditText
+                android:id="@+id/txtUsoPropiedad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Historial de pagos de impuestos sobre la propiedad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Historial de pagos de impuestos sobre la propiedad" />
+
+            <EditText
+                android:id="@+id/txtHistorialPagos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <!-- Número de predios asociados al contribuyente -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número de predios asociados al contribuyente" />
+
+            <EditText
+                android:id="@+id/txtNumPredios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+            <!-- Impuestos adeudados -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Impuestos adeudados" />
+
+            <EditText
+                android:id="@+id/txtImpuestosAdeudados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <!-- Fechas de vencimiento de los pagos -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fechas de vencimiento de los pagos" />
+
+            <EditText
+                android:id="@+id/txtFechaVencimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+
+            <!-- Pagos realizados y montos -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pagos realizados y montos" />
+
+            <EditText
+                android:id="@+id/txtPagosRealizados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <!-- Multas y recargos -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Multas y recargos" />
+
+            <EditText
+                android:id="@+id/txtMultasRecargos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <!-- Estado de procesos de fiscalizacion -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Proceso de fiscalizacion" />
+
+            <EditText
+                android:id="@+id/txtFiscalizacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnAddContribuyente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agregar" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Administración tributaria V2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Gerencia de administración tributaria</string>
+    <string name="nav_header_subtitle">Municipalidad Distrital De San Jerónimo</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_logout">Cerrar sesión</string>
+
+
+    <string name="menu_home">Consultar usuario</string>
+    <string name="menu_gallery">Ver tareas</string>
+    <string name="menu_slideshow">Capturar evidencias</string>
+    <string name="menu_solicitudes">Solicitudes</string>
+    <string name="menu_agregar_contribuyente">Agregar contribuyente</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
