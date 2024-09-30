@@ -8,29 +8,13 @@ public class Solicitud {
   private String correo;
   private String direccion;
   private String datoContribuyente;
-  private String referenciaLlegada;
-  private String imagenDomi1;
-  private String imagenDomi2;
-  private String imagenCroquis;
+  private String referencia;
+  private String imagen1;
+  private String imagen2;
+  private String plano;
 
   public Solicitud() {
   }
-
-  public Solicitud(String dni, String nombre, String apellidos, String telefono, String correo, String direccion, String datoContribuyente, String referenciaLlegada, String imagenDomi1, String imagenDomi2, String imagenCroquis) {
-    this.dni = dni;
-    this.nombre = nombre;
-    this.apellidos = apellidos;
-    this.telefono = telefono;
-    this.correo = correo;
-    this.direccion = direccion;
-    this.datoContribuyente = datoContribuyente;
-    this.referenciaLlegada = referenciaLlegada;
-    this.imagenDomi1 = imagenDomi1;
-    this.imagenDomi2 = imagenDomi2;
-    this.imagenCroquis = imagenCroquis;
-  }
-
-  // Getters y Setters
 
   public String getDni() {
     return dni;
@@ -40,12 +24,12 @@ public class Solicitud {
     this.dni = dni;
   }
 
-  public String getNombres() {
+  public String getNombre() {
     return nombre;
   }
 
-  public void setNombres(String nombres) {
-    this.nombre = nombres;
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
   }
 
   public String getApellidos() {
@@ -88,35 +72,35 @@ public class Solicitud {
     this.datoContribuyente = datoContribuyente;
   }
 
-  public String getReferenciaLlegada() {
-    return referenciaLlegada;
+  public String getReferencia() {
+    return referencia;
   }
 
-  public void setReferenciaLlegada(String referenciaLlegada) {
-    this.referenciaLlegada = referenciaLlegada;
+  public void setReferencia(String referencia) {
+    this.referencia = referencia;
   }
 
-  public String getImagenDomi1() {
-    return imagenDomi1;
+  public String getImagen1() {
+    return imagen1;
   }
 
-  public void setImagenDomi1(String imagenDomi1) {
-    this.imagenDomi1 = imagenDomi1;
+  public void setImagen1(String imagen1) {
+    this.imagen1 = imagen1;
   }
 
-  public String getImagenDomi2() {
-    return imagenDomi2;
+  public String getImagen2() {
+    return imagen2;
   }
 
-  public void setImagenDomi2(String imagenDomi2) {
-    this.imagenDomi2 = imagenDomi2;
+  public void setImagen2(String imagen2) {
+    this.imagen2 = imagen2;
   }
 
-  public String getImagenCroquis() {
-    return imagenCroquis;
+  public String getPlano() {
+    return plano;
   }
 
-  public void setImagenCroquis(String imagenCroquis) {
-    this.imagenCroquis = imagenCroquis;
+  public void setPlano(String plano) {
+    this.plano = plano;
   }
 }

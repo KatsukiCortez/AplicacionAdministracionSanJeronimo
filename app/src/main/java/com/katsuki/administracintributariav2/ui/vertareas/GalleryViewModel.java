@@ -1,4 +1,4 @@
-package com.katsuki.administracintributariav2.ui.gallery;
+package com.katsuki.administracintributariav2.ui.vertareas;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

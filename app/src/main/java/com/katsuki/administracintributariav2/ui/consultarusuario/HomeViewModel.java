@@ -1,4 +1,4 @@
-package com.katsuki.administracintributariav2.ui.home;
+package com.katsuki.administracintributariav2.ui.consultarusuario;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +10,7 @@ public class HomeViewModel extends ViewModel {
 
   public HomeViewModel() {
     mText = new MutableLiveData<>();
-    mText.setValue("This is home fragment");
+    mText.setValue("This is consultarusuario fragment");
   }
 
   public LiveData<String> getText() {

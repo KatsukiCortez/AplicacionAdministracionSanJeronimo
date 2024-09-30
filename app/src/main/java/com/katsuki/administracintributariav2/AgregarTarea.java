@@ -40,19 +40,19 @@ public class AgregarTarea extends DialogFragment {
                            Bundle savedInstanceState) {
 
     View v = inflater.inflate(R.layout.fragment_agregar_tarea, container, false);
+
     mfirestore = FirebaseFirestore.getInstance();
     nombreTarea = v.findViewById(R.id.txtTarea);
     ubicacionTarea = v.findViewById(R.id.txtUbicacion);
     descripcionTarea = v.findViewById(R.id.txtDescripcion);
     agregarTarea = v.findViewById(R.id.btnAgregarTarea);
 
-
     agregarTarea.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        String nameTarea = nombreTarea.getText().toString().trim();
-        String placeTarea = ubicacionTarea.getText().toString().trim();
-        String descripTarea = descripcionTarea.getText().toString().toString();
+        String nameTarea = nombreTarea.getText().toString();
+        String placeTarea = ubicacionTarea.getText().toString();
+        String descripTarea = descripcionTarea.getText().toString();
 
         if (nameTarea.isEmpty() || placeTarea.isEmpty() || descripTarea.isEmpty()){
           Toast.makeText(getContext(), "Debes llenar todos los datos", Toast.LENGTH_SHORT).show();
@@ -62,7 +62,33 @@ public class AgregarTarea extends DialogFragment {
       }
     });
 
+
+
     return v;
+  }
+
+  private void updateTask(String nameTarea, String placeTarea, String descripTarea, String id) {
+    // VAMOS A OBTENER EL ID DEL USUARIO LOGEADO
+    String idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    Map<String, Object> map = new HashMap<>();
+    map.put("userId", idUsuario);
+    map.put("tarea", nameTarea);
+    map.put("ubicacion", placeTarea);
+    map.put("descripcion", descripTarea);
+
+    mfirestore.collection("task").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+      @Override
+      public void onSuccess(Void unused) {
+        Toast.makeText(getContext(), "Tarea actualizado con exito", Toast.LENGTH_SHORT).show();
+        getDialog().dismiss();
+      }
+    }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+        Toast.makeText(getContext(), "ERROR! Tarea no actualizada", Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   // ESTE METODO SIRVE PARA QUE PUEDA PUBLICAR LAS TAREAS EN LA BASE DE DATOS

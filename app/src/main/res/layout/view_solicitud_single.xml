@@ -20,6 +20,7 @@
             android:padding="10dp">
 
             <!-- Header -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -228,16 +229,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Imagen del croquis" />
+                    android:text="Imagen del croquis/plano" />
 
                 <ImageView
-                    android:id="@+id/imgCroquis"
+                    android:id="@+id/imgPlano"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     tools:srcCompat="@tools:sample/avatars" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDarRespuesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Responder" />
 
         </LinearLayout>
     </ScrollView>

@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -84,4 +85,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
 
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 }

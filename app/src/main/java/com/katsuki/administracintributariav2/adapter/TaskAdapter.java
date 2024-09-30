@@ -1,8 +1,10 @@
 package com.katsuki.administracintributariav2.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
     holder.tarea.setText(Task.getTarea());
     holder.ubicacion.setText(Task.getUbicacion());
     holder.descripcion.setText(Task.getDescripcion());
+
   }
 
   @NonNull
@@ -35,6 +38,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
 
   public class ViewHolder extends RecyclerView.ViewHolder {
     TextView tarea, ubicacion, descripcion;
+    ImageView editarTarea;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
@@ -42,6 +46,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
       tarea = itemView.findViewById(R.id.tviewTarea);
       ubicacion = itemView.findViewById(R.id.tviewUbicacion);
       descripcion = itemView.findViewById(R.id.tviewDescripcion);
+      editarTarea = itemView.findViewById(R.id.btnEditarTarea);
     }
   }
 }

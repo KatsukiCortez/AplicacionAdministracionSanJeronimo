@@ -1,4 +1,4 @@
-package com.katsuki.administracintributariav2.ui.gallery;
+package com.katsuki.administracintributariav2.ui.vertareas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.katsuki.administracintributariav2.AgregarTarea;
 import com.katsuki.administracintributariav2.CrearTarea;
-import com.katsuki.administracintributariav2.MainActivity;
 import com.katsuki.administracintributariav2.adapter.TaskAdapter;
 import com.katsuki.administracintributariav2.databinding.FragmentGalleryBinding;
 import com.katsuki.administracintributariav2.model.Task;
@@ -62,15 +60,15 @@ public class GalleryFragment extends Fragment {
     mRecycler.setAdapter(mAdapter);
 
     // DARLE CLICK AL AGREGAR TAREA
-    btnAgregar = binding.btnAddTask;
+//    btnAgregar = binding.btnAddTask;
     btnFlotante = binding.btnAgregarFlotante;
 
-    btnAgregar.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        startActivity(new Intent(getContext(), CrearTarea.class));
-      }
-    });
+//    btnAgregar.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        startActivity(new Intent(getContext(), CrearTarea.class));
+//      }
+//    });
 
     btnFlotante.setOnClickListener(new View.OnClickListener() {
       @Override
