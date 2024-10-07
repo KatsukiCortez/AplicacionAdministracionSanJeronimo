@@ -84,30 +84,36 @@ public class Login extends AppCompatActivity {
     mAuth.signInWithEmailAndPassword(emailUser, passUser).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
       @Override
       public void onComplete(@NonNull Task<AuthResult> task) {
-        // Guardar estado de "recuerdame" en SharedPreferences
-        if (recuerdame.isChecked()) {
-          sharedPreferences.edit().putBoolean("rememberMe", true).apply();
+        if (task.isSuccessful()) {
+          // Guardar estado de "recuerdame" en SharedPreferences
+          if (recuerdame.isChecked()) {
+            sharedPreferences.edit().putBoolean("rememberMe", true).apply();
+          } else {
+            sharedPreferences.edit().putBoolean("rememberMe", false).apply();
+          }
+
+          // Mostrar mensaje de bienvenida
+          Toast.makeText(Login.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+
+          // Redirigir a la pantalla principal solo si la autenticación fue exitosa
+          Intent pantallaPrincipal = new Intent(Login.this, MainActivity.class);
+          startActivity(pantallaPrincipal);
+          finish();  // Finaliza la actividad de inicio de sesión para no volver atrás
+
         } else {
-          sharedPreferences.edit().putBoolean("rememberMe", false).apply();
+          // En caso de error, mostrar mensaje
+          Toast.makeText(Login.this, "Error al iniciar sesión. Verifique sus credenciales.", Toast.LENGTH_SHORT).show();
         }
-        finish();
-
-        //MOSTRAMOS MENSAJE DE BIENVENIDA
-        Toast.makeText(Login.this, "Bienvenido ", Toast.LENGTH_SHORT).show();
-
-
-        Intent pantallaPrincipal = new Intent(Login.this, MainActivity.class);
-        startActivity(pantallaPrincipal);
-
-
       }
     }).addOnFailureListener(new OnFailureListener() {
       @Override
       public void onFailure(@NonNull Exception e) {
-        Toast.makeText(Login.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+        // En caso de fallo por alguna otra razón (por ejemplo, problemas de conexión)
+        Toast.makeText(Login.this, "Error al iniciar sesión: " + e.getMessage(), Toast.LENGTH_SHORT).show();
       }
     });
   }
+
 
   private void checkRememberedUser() {
     // Si el usuario ha marcado "recuerdame", pasamos automáticamente a la pantalla principal

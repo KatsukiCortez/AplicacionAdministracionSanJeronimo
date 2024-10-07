@@ -88,4 +88,14 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    // Pruebas instrumentadas con Espresso
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+
+    // Pruebas unitarias con JUnit
+    testImplementation ("junit:junit:4.13.2")
+
+    // Firebase Auth Test Helpers (si es necesario para mocking)
+    androidTestImplementation ("com.google.firebase:firebase-auth:21.0.1")
 }
