@@ -30,15 +30,35 @@ public class AgregarTarea extends DialogFragment {
   private FirebaseFirestore mfirestore;
   FirebaseAuth mAuth;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  // Variables para almacenar los datos de la tarea
+  private String taskId = null;  // ID de la tarea
+  private String tarea = "", ubicacion = "", descripcion = "";
+
+  // Método estático para crear una nueva instancia con parámetros
+  public static AgregarTarea newInstance(String taskId, String tarea, String ubicacion, String descripcion) {
+    AgregarTarea fragment = new AgregarTarea();
+    Bundle args = new Bundle();
+    args.putString("taskId", taskId);
+    args.putString("tarea", tarea);
+    args.putString("ubicacion", ubicacion);
+    args.putString("descripcion", descripcion);
+    fragment.setArguments(args);
+    return fragment;
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    if (getArguments() != null) {
+      taskId = getArguments().getString("taskId");
+      tarea = getArguments().getString("tarea");
+      ubicacion = getArguments().getString("ubicacion");
+      descripcion = getArguments().getString("descripcion");
+    }
+  }
 
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_agregar_tarea, container, false);
 
     mfirestore = FirebaseFirestore.getInstance();
@@ -47,6 +67,14 @@ public class AgregarTarea extends DialogFragment {
     descripcionTarea = v.findViewById(R.id.txtDescripcion);
     agregarTarea = v.findViewById(R.id.btnAgregarTarea);
 
+    // Si taskId no es nulo, estamos editando una tarea
+    if (taskId != null) {
+      nombreTarea.setText(tarea); // Autocompletar los campos
+      ubicacionTarea.setText(ubicacion);
+      descripcionTarea.setText(descripcion);
+      agregarTarea.setText("Actualizar tarea"); // Cambiar el texto del botón
+    }
+
     agregarTarea.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -54,21 +82,24 @@ public class AgregarTarea extends DialogFragment {
         String placeTarea = ubicacionTarea.getText().toString();
         String descripTarea = descripcionTarea.getText().toString();
 
-        if (nameTarea.isEmpty() || placeTarea.isEmpty() || descripTarea.isEmpty()){
+        if (nameTarea.isEmpty() || placeTarea.isEmpty() || descripTarea.isEmpty()) {
           Toast.makeText(getContext(), "Debes llenar todos los datos", Toast.LENGTH_SHORT).show();
-        }else {
-          postTask(nameTarea,placeTarea,descripTarea);
+        } else {
+          if (taskId != null) {
+            // Si hay un taskId, actualizamos la tarea
+            updateTask(nameTarea, placeTarea, descripTarea, taskId);
+          } else {
+            // Si no hay taskId, agregamos una nueva tarea
+            postTask(nameTarea, placeTarea, descripTarea);
+          }
         }
       }
     });
-
-
 
     return v;
   }
 
   private void updateTask(String nameTarea, String placeTarea, String descripTarea, String id) {
-    // VAMOS A OBTENER EL ID DEL USUARIO LOGEADO
     String idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Map<String, Object> map = new HashMap<>();
@@ -80,7 +111,7 @@ public class AgregarTarea extends DialogFragment {
     mfirestore.collection("task").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {
-        Toast.makeText(getContext(), "Tarea actualizado con exito", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Tarea actualizada con éxito", Toast.LENGTH_SHORT).show();
         getDialog().dismiss();
       }
     }).addOnFailureListener(new OnFailureListener() {
@@ -91,10 +122,7 @@ public class AgregarTarea extends DialogFragment {
     });
   }
 
-  // ESTE METODO SIRVE PARA QUE PUEDA PUBLICAR LAS TAREAS EN LA BASE DE DATOS
-  // RECORDAR QUE EN LA BASE DE DATOS SE DEBE PONER EL true EN LAS REGLAS DE LA BD
   private void postTask(String nameTarea, String placeTarea, String descripTarea) {
-    // VAMOS A OBTENER EL ID DEL USUARIO LOGEADO
     String idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Map<String, Object> map = new HashMap<>();
@@ -106,7 +134,7 @@ public class AgregarTarea extends DialogFragment {
     mfirestore.collection("task").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
       @Override
       public void onSuccess(DocumentReference documentReference) {
-        Toast.makeText(getContext(), "Tarea agregada con exito", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Tarea agregada con éxito", Toast.LENGTH_SHORT).show();
         getDialog().dismiss();
       }
     }).addOnFailureListener(new OnFailureListener() {

@@ -1,6 +1,5 @@
 package com.katsuki.administracintributariav2.ui.vertareas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.katsuki.administracintributariav2.AgregarTarea;
-import com.katsuki.administracintributariav2.CrearTarea;
 import com.katsuki.administracintributariav2.adapter.TaskAdapter;
 import com.katsuki.administracintributariav2.databinding.FragmentGalleryBinding;
 import com.katsuki.administracintributariav2.model.Task;
@@ -29,7 +27,7 @@ public class GalleryFragment extends Fragment {
 
 
   // VARIABLES
-  Button btnAgregar, btnFlotante;
+  Button btnFlotante;
   RecyclerView mRecycler;
   TaskAdapter mAdapter;
   FirebaseFirestore mFirestore;
@@ -49,6 +47,21 @@ public class GalleryFragment extends Fragment {
     mRecycler = binding.rcvTareas;
     mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
+    //    PARTE INICIAL DE AGREGAR TAREA
+    // DARLE CLICK AL AGREGAR TAREA
+    btnFlotante = binding.btnAgregarFlotante;
+
+    // DARLE CLICK AL BOTON AGREGAR TAREA FLOTANTE
+    btnFlotante.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        AgregarTarea fmTarea = new AgregarTarea();
+        fmTarea.show(getActivity().getSupportFragmentManager(), "Navegar a fragment");
+      }
+    });
+
+
+    //    PARTE PARA MOSTRAR LAS TAREAS
     // OBTENER EL ID DE USUSARIO LOGEADO PARA CARGAR LAS TAREAS SOLO PARA ESE USUSARIO
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -58,25 +71,6 @@ public class GalleryFragment extends Fragment {
     mAdapter = new TaskAdapter(firestoreRecyclerOptions);
     mAdapter.notifyDataSetChanged();
     mRecycler.setAdapter(mAdapter);
-
-    // DARLE CLICK AL AGREGAR TAREA
-//    btnAgregar = binding.btnAddTask;
-    btnFlotante = binding.btnAgregarFlotante;
-
-//    btnAgregar.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        startActivity(new Intent(getContext(), CrearTarea.class));
-//      }
-//    });
-
-    btnFlotante.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        AgregarTarea fmTarea = new AgregarTarea();
-        fmTarea.show(getActivity().getSupportFragmentManager(), "Navegar a fragment");
-      }
-    });
 
     return root;
   }
@@ -90,6 +84,12 @@ public class GalleryFragment extends Fragment {
   @Override
   public void onStop() {
     super.onStop();
+    mAdapter.stopListening();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
     mAdapter.stopListening();
   }
 

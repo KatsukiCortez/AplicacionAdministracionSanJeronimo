@@ -1,6 +1,5 @@
 package com.katsuki.administracintributariav2.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.katsuki.administracintributariav2.AgregarTarea;
 import com.katsuki.administracintributariav2.R;
 import com.katsuki.administracintributariav2.model.Task;
 
@@ -27,7 +28,31 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
     holder.ubicacion.setText(Task.getUbicacion());
     holder.descripcion.setText(Task.getDescripcion());
 
+    // LISTENER PARA EDITAR LA TAREA SELECIONADA
+    holder.editarTarea.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        // Abrir el fragmento o diálogo pasando los datos de la tarea
+        dialogoEditarTarea(v, Task, position);
+      }
+    });
+
   }
+
+  private void dialogoEditarTarea(View v, Task task, int position) {
+    // Obtener el taskId desde Firestore usando la posición
+    String taskId = getSnapshots().getSnapshot(position).getId();
+
+    // Obtener los datos de la tarea
+    String taskName = task.getTarea();
+    String taskLocation = task.getUbicacion();
+    String taskDescription = task.getDescripcion();
+
+    // Crear un diálogo o fragmento y pasarle los datos de la tarea
+    AgregarTarea editarTareaDialog = AgregarTarea.newInstance(taskId, taskName, taskLocation, taskDescription);
+    editarTareaDialog.show(((FragmentActivity) v.getContext()).getSupportFragmentManager(), "EditarTarea");
+  }
+
 
   @NonNull
   @Override

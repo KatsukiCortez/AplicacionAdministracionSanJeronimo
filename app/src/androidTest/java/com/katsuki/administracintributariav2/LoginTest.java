@@ -26,7 +26,7 @@ public class LoginTest {
   @Test
   public void testLoginSuccess() {
     // Escribe texto en los campos de correo y contraseña
-    onView(withId(R.id.txtCorreo)).perform(typeText("test@correo.com"));
+    onView(withId(R.id.txtCorreo)).perform(typeText("testuser@correo.com"));
     onView(withId(R.id.txtPassword)).perform(typeText("password123"), ViewActions.closeSoftKeyboard());
 
     // Haz clic en el botón de ingresar
@@ -51,7 +51,7 @@ public class LoginTest {
     onView(withId(R.id.chbRemember)).perform(click());
 
     // Escribe texto en los campos de correo y contraseña
-    onView(withId(R.id.txtCorreo)).perform(typeText("test@correo.com"));
+    onView(withId(R.id.txtCorreo)).perform(typeText("testuser@correo.com"));
     onView(withId(R.id.txtPassword)).perform(typeText("password123"), ViewActions.closeSoftKeyboard());
 
     // Haz clic en el botón de ingresar

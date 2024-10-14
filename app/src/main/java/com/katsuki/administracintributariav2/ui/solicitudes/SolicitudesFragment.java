@@ -55,6 +55,13 @@ public class SolicitudesFragment extends Fragment {
   }
 
   @Override
+  public void onPause() {
+    super.onPause();
+    binding = null;
+
+  }
+
+  @Override
   public void onDestroyView() {
     super.onDestroyView();
     binding = null;
