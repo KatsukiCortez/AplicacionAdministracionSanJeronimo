@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -11,7 +12,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.katsuki.administracintributariav2.R;
+import com.katsuki.administracintributariav2.ResponderSolicitud;
 import com.katsuki.administracintributariav2.model.Solicitud;
+
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +40,32 @@ public class SolicitudAdapter extends FirestoreRecyclerAdapter<Solicitud, Solici
 
     // Llamar a la función que cargará las imágenes de Firebase Storage
     cargarImagenes(solicitudId, holder);
+
+    // LISTENER PARA EDITAR LA TAREA SELECCIONADA
+    holder.darRespuesta.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        // ABRIR EL FRAGMENTO PASANDOLE LOS DATOS DE LA SOLICITUD
+        dialogoResponder(v, solicitud, position);
+      }
+    });
+  }
+
+  private void dialogoResponder(View v, Solicitud solicitud, int position){
+    // OBTENER EL ID DESDE FIRESTORE USANDO LA POSICION
+    String solicitudid = getSnapshots().getSnapshot(position).getId();
+
+    //OBTENER EL DNI, NOMBRES Y APELLIDOS
+    String dniSolicitud = solicitud.getDni();
+    String nombreSolicitud = solicitud.getNombre();
+    String apellidosSolicitud = solicitud.getApellidos();
+
+    // CREAMOS EL DIALOGO PARA RESPONDERLE
+    if (v.getContext() instanceof FragmentActivity) {
+      ResponderSolicitud responderDialog = ResponderSolicitud.newInstance(solicitudid, dniSolicitud, nombreSolicitud, apellidosSolicitud);
+      responderDialog.show(((FragmentActivity) v.getContext()).getSupportFragmentManager(), "ResponderSolicitud");
+    }
+
   }
 
   private void cargarImagenes(String solicitudId, ViewHolder holder) {
@@ -76,16 +106,18 @@ public class SolicitudAdapter extends FirestoreRecyclerAdapter<Solicitud, Solici
   @NonNull
   @Override
   public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_solicitud_single, parent, false);
-    return new ViewHolder(view);
+    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_solicitud_single, parent, false);
+    return new ViewHolder(v);
   }
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
     TextView tviewDNI, tviewNombres, tviewApellidos, tviewTelefono, tviewCorreo, tviewDireccion, tviewDatoContribuyente, tviewReferenciaLlegada;
     ImageView imgDomi1, imgDomi2, imgPlano;
+    Button darRespuesta;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
+
       tviewDNI = itemView.findViewById(R.id.tviewDNI);
       tviewNombres = itemView.findViewById(R.id.tviewNombres);
       tviewApellidos = itemView.findViewById(R.id.tviewApellidos);
@@ -97,6 +129,7 @@ public class SolicitudAdapter extends FirestoreRecyclerAdapter<Solicitud, Solici
       imgDomi1 = itemView.findViewById(R.id.imgDomi1);
       imgDomi2 = itemView.findViewById(R.id.imgDomi2);
       imgPlano = itemView.findViewById(R.id.imgPlano);
+      darRespuesta = itemView.findViewById(R.id.btnDarRespuesta);
     }
   }
 }

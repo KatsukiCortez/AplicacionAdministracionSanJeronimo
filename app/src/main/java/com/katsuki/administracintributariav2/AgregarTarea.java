@@ -78,6 +78,7 @@ public class AgregarTarea extends DialogFragment {
     agregarTarea.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        String estadoTarea = "";
         String nameTarea = nombreTarea.getText().toString();
         String placeTarea = ubicacionTarea.getText().toString();
         String descripTarea = descripcionTarea.getText().toString();
@@ -87,10 +88,10 @@ public class AgregarTarea extends DialogFragment {
         } else {
           if (taskId != null) {
             // Si hay un taskId, actualizamos la tarea
-            updateTask(nameTarea, placeTarea, descripTarea, taskId);
+            updateTask(estadoTarea, nameTarea, placeTarea, descripTarea, taskId);
           } else {
             // Si no hay taskId, agregamos una nueva tarea
-            postTask(nameTarea, placeTarea, descripTarea);
+            postTask(estadoTarea, nameTarea, placeTarea, descripTarea);
           }
         }
       }
@@ -99,11 +100,12 @@ public class AgregarTarea extends DialogFragment {
     return v;
   }
 
-  private void updateTask(String nameTarea, String placeTarea, String descripTarea, String id) {
+  private void updateTask(String estadoTarea, String nameTarea, String placeTarea, String descripTarea, String id) {
     String idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Map<String, Object> map = new HashMap<>();
     map.put("userId", idUsuario);
+    map.put("estado", estadoTarea);
     map.put("tarea", nameTarea);
     map.put("ubicacion", placeTarea);
     map.put("descripcion", descripTarea);
@@ -122,11 +124,12 @@ public class AgregarTarea extends DialogFragment {
     });
   }
 
-  private void postTask(String nameTarea, String placeTarea, String descripTarea) {
+  private void postTask(String estadoTarea, String nameTarea, String placeTarea, String descripTarea) {
     String idUsuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Map<String, Object> map = new HashMap<>();
     map.put("userId", idUsuario);
+    map.put("estado", estadoTarea);
     map.put("tarea", nameTarea);
     map.put("ubicacion", placeTarea);
     map.put("descripcion", descripTarea);

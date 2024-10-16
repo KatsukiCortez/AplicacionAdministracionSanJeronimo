@@ -41,8 +41,8 @@ public class EvidenciaAdapter extends FirestoreRecyclerAdapter<Evidencia, Eviden
       super(itemView);
 
       tarea = itemView.findViewById(R.id.tviewTarea);
-      ubicacion = itemView.findViewById(R.id.tviewUbicacion);
-      descripcion = itemView.findViewById(R.id.tviewDescripcion);
+      ubicacion = itemView.findViewById(R.id.txtNombre);
+      descripcion = itemView.findViewById(R.id.txtApellidos);
     }
   }
 }

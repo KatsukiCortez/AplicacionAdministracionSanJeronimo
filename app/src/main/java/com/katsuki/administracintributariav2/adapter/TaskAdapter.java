@@ -28,7 +28,7 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
     holder.ubicacion.setText(Task.getUbicacion());
     holder.descripcion.setText(Task.getDescripcion());
 
-    // LISTENER PARA EDITAR LA TAREA SELECIONADA
+    // LISTENER PARA EDITAR LA TAREA SELECCIONADA
     holder.editarTarea.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -69,8 +69,8 @@ public class TaskAdapter extends FirestoreRecyclerAdapter<Task, TaskAdapter.View
       super(itemView);
 
       tarea = itemView.findViewById(R.id.tviewTarea);
-      ubicacion = itemView.findViewById(R.id.tviewUbicacion);
-      descripcion = itemView.findViewById(R.id.tviewDescripcion);
+      ubicacion = itemView.findViewById(R.id.txtNombre);
+      descripcion = itemView.findViewById(R.id.txtApellidos);
       editarTarea = itemView.findViewById(R.id.btnEditarTarea);
     }
   }

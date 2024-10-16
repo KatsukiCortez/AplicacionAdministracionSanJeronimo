@@ -35,6 +35,8 @@ public class SolicitudesFragment extends Fragment {
     binding = FragmentSolicitudesBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
+
+    // PARTE QUE MUESTRA LAS SOLICITUDES
     mFirestore = FirebaseFirestore.getInstance();
     mRecycler = binding.rcvSolicitudes;
     mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));

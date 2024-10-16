@@ -69,7 +69,7 @@ public class ContribuyenteAdapter extends FirestoreRecyclerAdapter<Contribuyente
       predios = itemView.findViewById(R.id.tviewPredios);
       propiedad = itemView.findViewById(R.id.tviewPropiedad);
       telefono = itemView.findViewById(R.id.tviewTelefono);
-      ubicacion = itemView.findViewById(R.id.tviewUbicacion);
+      ubicacion = itemView.findViewById(R.id.txtNombre);
       uso = itemView.findViewById(R.id.tviewUso);
       valor = itemView.findViewById(R.id.tviewValor);
       vencimiento = itemView.findViewById(R.id.tviewVencimiento);
