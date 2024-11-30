@@ -14,13 +14,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ResponderSolicitud extends DialogFragment {
   Button responder, agregarDocumento;
-  TextView verdni, verapellidos, vernombre ,verrespuesta, verobservacion;
+  TextView verdni, verapellidos, vernombre ;
   ImageView documento;
+  EditText res, obs;
+
 
   private FirebaseFirestore mfirestore;
   FirebaseAuth mAuth;
@@ -50,6 +57,7 @@ public class ResponderSolicitud extends DialogFragment {
       dni = getArguments().getString("dni");
       nombre = getArguments().getString("nombre");
       apellidos = getArguments().getString("apellidos");
+
     }
   }
 
@@ -61,8 +69,11 @@ public class ResponderSolicitud extends DialogFragment {
     verdni = v.findViewById(R.id.txtDni);
     vernombre = v.findViewById(R.id.txtNombre);
     verapellidos = v.findViewById(R.id.txtApellidos);
+    res = v.findViewById(R.id.txtRespuesta);
+    obs = v.findViewById(R.id.txtObservacion);
     agregarDocumento = v.findViewById(R.id.btnAgregarDocumento);
     responder = v.findViewById(R.id.btnEnviarRespuesta);
+
 
     if (solicitudId != null){
       // AUTOCOMPLETAR LOS TEXTVIEW
@@ -74,9 +85,43 @@ public class ResponderSolicitud extends DialogFragment {
     responder.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Toast.makeText(getContext(), "Estas respondiendo", Toast.LENGTH_SHORT).show();
+        // Obtener los valores ingresados por el usuario
+        String respuesta = res.getText().toString().trim();
+        String observacion = obs.getText().toString().trim();
+
+        if (respuesta.isEmpty() || observacion.isEmpty()) {
+          Toast.makeText(getContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+          return;
+        }
+
+        if (solicitudId != null) {
+          // Preparar datos para actualizar en Firestore
+          Map<String, Object> dataToUpdate = new HashMap<>();
+          dataToUpdate.put("respuesta", respuesta);
+          dataToUpdate.put("observacion", observacion);
+
+          // Actualizar Firestore
+          mfirestore.collection("solicitudes").document(solicitudId)
+                  .update(dataToUpdate)
+                  .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                      Toast.makeText(getContext(), "Respuesta enviada con éxito", Toast.LENGTH_SHORT).show();
+                      dismiss(); // Cerrar el fragmento
+                    }
+                  })
+                  .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                      Toast.makeText(getContext(), "Error al enviar la respuesta: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                  });
+        } else {
+          Toast.makeText(getContext(), "ID de solicitud no disponible", Toast.LENGTH_SHORT).show();
+        }
       }
     });
+
 
     return v;
   }
